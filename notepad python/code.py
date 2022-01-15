@@ -23,4 +23,4 @@ while True:
         f = open('txt.txt', 'w')
         f.write('')
     else:
-        print('Write correct command')
+        print('Incorrect command')
