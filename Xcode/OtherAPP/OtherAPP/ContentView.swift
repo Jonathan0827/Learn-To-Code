@@ -109,8 +109,7 @@ struct ContentView3: View{
 }
 struct ContentView4: View{
     @State var languages = ["Swift", "HTML", "CSS", "JavaScript", "Python"]
-    @State var colors = ["red", "orange", "yellow", "green", "blue", "purple", "black", "white"]
-    @State var selcolor = 0
+    @State var sellang: Int = 0
     @State var txtf: String = ""
     @State var txtf1: String = ""
     @State var txtf2: String = ""
@@ -120,8 +119,8 @@ struct ContentView4: View{
         NavigationView{
             VStack{
                 Picker(selection: $languages, label: Text("Texts")){
-                ForEach(0 ..< languages.count) {
-                    Text(self.languages[$0])
+                ForEach(sellang ..< languages.count) {
+                    Text(self.languages[$sellang])
                 }
             }
                 HStack{
