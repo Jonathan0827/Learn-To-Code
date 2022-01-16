@@ -8,11 +8,8 @@
 import SwiftUI
 
 struct Tab: View{
-    @State var ifdevice: String?
     var body: some View{
         VStack{
-            Text("This app is not optimized for iPad")
-                .font(.largeTitle)
             TabView{
                 ContentView()
                     .tabItem{
