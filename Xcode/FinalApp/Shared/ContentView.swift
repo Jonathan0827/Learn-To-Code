@@ -8,36 +8,39 @@
 import SwiftUI
 
 struct Tab: View{
+    @State var ifdevice: String?
     var body: some View{
-        TabView{
-            ContentView()
-                .tabItem{
-                    Image(systemName: "gear.circle")
-                    Text("list")
+        VStack{
+            Text("This app is not optimized for iPad")
+                .font(.largeTitle)
+            TabView{
+                ContentView()
+                    .tabItem{
+                        Image(systemName: "gear.circle")
+                        Text("list")
+                }
+                ContentView2()
+                    .tabItem{
+                        Image(systemName: "questionmark.folder.fill")
+                        Text("TextField, alert")
+                    }
+                ContentView3()
+                    .tabItem{
+                        Image(systemName: "gyroscope")
+                        Text("form")
+                    }
+                ContentView4()
+                    .tabItem{
+                        Image(systemName: "snowflake.circle")
+                        Text("picker")
+                    }
+                ContentView5()
+                    .tabItem{
+                        Image(systemName: "command")
+                        Text("Everything else")
+                    }
             }
-            ContentView2()
-                .tabItem{
-                    Image(systemName: "questionmark.folder.fill")
-                    Text("TextField, alert")
-                }
-            ContentView3()
-                .tabItem{
-                    Image(systemName: "gyroscope")
-                    Text("form")
-                }
-            ContentView4()
-                .tabItem{
-                    Image(systemName: "snowflake.circle")
-                    Text("picker")
-                }
-            ContentView5()
-                .tabItem{
-                    Image(systemName: "command")
-                    Text("Acrion sheet")
-                }
         }
-        
-        
     }
 }
 
@@ -70,19 +73,22 @@ struct ContentView2: View{
     @State var txtf : String = ""
     @State private var showingAlert = false
     var body: some View{
-        VStack{
-            TextField("enter text.", text: $txtf)
+        NavigationView{
+            VStack{
+                TextField("enter text.", text: $txtf)
+                    .padding(.horizontal)
+                Button(action: {
+                    self.showingAlert = true
+                }) {
+                    Text("show")
+                }
                 .padding(.horizontal)
-            Button(action: {
-                self.showingAlert = true
-            }) {
-                Text("show")
-            }
-            .padding(.horizontal)
-            .alert(isPresented: $showingAlert) {
-                Alert(title: Text("alert"), message: Text("Alert"), dismissButton: .default(Text("DISMISS?")))
-            }
+                .alert(isPresented: $showingAlert) {
+                    Alert(title: Text("alert"), message: Text("Alert"), dismissButton: .default(Text("DISMISS?")))
+                }
+            }.navigationTitle(Text("TxtField, Alert"))
         }
+
     }
 }
 struct ContentView3: View{
@@ -190,20 +196,25 @@ struct ContentView5: View{
     @State var show = false
     var body: some View{
         NavigationView{
-            Button(action: {
-                self.show = true
-            }) {
-                Text("ACTION SHEET!")
-            }
-            .actionSheet(isPresented: $show) {
-                ActionSheet(title: Text("act"), buttons: [.default(Text("dismiss")), .cancel(Text("Cancel"))])
-            }
-        }.navigationTitle(Text("ActionSheet"))
+            VStack{
+                
+                Button(action: {
+                    self.show = true
+                }) {
+                    Text("ACTION SHEET!")
+                }
+                .actionSheet(isPresented: $show) {
+                    ActionSheet(title: Text("act"), buttons: [.default(Text("dismiss")), .cancel(Text("Cancel"))])
+                }
+            }.navigationTitle(Text("else"))
+        }
     }
 }
 
 struct Tab_Previews: PreviewProvider{
     static var previews: some View{
         Tab()
+            .previewDevice("iPhone 13 Pro")
+            
     }
 }
